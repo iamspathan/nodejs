@@ -1,32 +1,31 @@
-// index.js
-
 const express = require('express');
 const app = express();
-const port = 3000; // You can use any available port here
+const port = 3000;
 
-// Middlewares
-app.use(express.json()); // For parsing application/json
-app.use(express.urlencoded({ extended: true })); // For parsing application/x-www-form-urlencoded
+// Middleware to parse JSON bodies
+app.use(express.json());
 
-// 'Hello' Greeting Endpoint
-app.post('/hello', (req, res) => {
-  const { name } = req.body; // Extract the name from the request body
-  if (!name) {
-    return res.status(400).json({ error: 'Name is required' }); // Return an error if no name is provided
-  }
-  res.json({ message: `Hello, ${name}` }); // Return a 'Hello' greeting message
+// Sum endpoint
+app.post('/sum', (req, res) => {
+    const { firstNumber, secondNumber } = req.body;
+    const sum = firstNumber + secondNumber;
+    res.json({ result: sum });
 });
 
-// 'Hi' Greeting Endpoint
-app.post('/hi', (req, res) => {
-  const { name } = req.body; // Extract the name from the request body
-  if (!name) {
-    return res.status(400).json({ error: 'Name is required' }); // Return an error if no name is provided
-  }
-  res.json({ message: `Hi, ${name}` }); // Return a 'Hi' greeting message
+// Minus endpoint
+app.post('/minus', (req, res) => {
+    const { firstNumber, secondNumber } = req.body;
+    const difference = firstNumber - secondNumber;
+    res.json({ result: difference });
 });
 
-// Start the server
+// Multiply endpoint
+app.post('/multiply', (req, res) => {
+    const { firstNumber, secondNumber } = req.body;
+    const product = firstNumber * secondNumber;
+    res.json({ result: product });
+});
+
 app.listen(port, () => {
-  console.log(`Server running on http://localhost:${port}`);
+    console.log(`Math API server listening at http://localhost:${port}`);
 });
