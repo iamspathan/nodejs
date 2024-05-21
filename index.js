@@ -9,7 +9,9 @@ app.use(express.json());
 app.post('/sum', (req, res) => {
     const { firstNumber, secondNumber } = req.body;
     const sum = firstNumber + secondNumber;
+    console.log(req.headers);
     res.json({ result: sum });
+    
 });
 
 // Minus endpoint
